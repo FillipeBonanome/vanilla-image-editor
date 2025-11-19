@@ -57,34 +57,40 @@ redSlider.addEventListener('change', applySliderChanges);
 greenSlider.addEventListener('change', applySliderChanges);
 blueSlider.addEventListener('change', applySliderChanges);
 
-function applyRedChanges(red) {
+function applyRedChanges(red, iteration) {
     const redColor = redValue.innerText;
     if(redColor == 50) { return red; }
     if(redColor > 50) {
         const distance = 255 - red;
         return red + (distance * (redColor - 50) / 50);
     }
-    return red * (redColor) / 50
+    const average = (iteration[0] + iteration[1] + iteration[2]) / 3;
+    const averageDistance = red - average;
+    return red - (averageDistance * (1 - redColor / 50));
 }
 
-function applyGreenChanges(green) {
+function applyGreenChanges(green, iteration) {
     const greenColor = greenValue.innerText;
     if(greenColor == 50) { return green; }
     if(greenColor > 50) {
         const distance = 255 - green;
         return green + (distance * (greenColor - 50) / 50);
     }
-    return green * (greenColor) / 50
+    const average = (iteration[0] + iteration[1] + iteration[2]) / 3;
+    const averageDistance = green - average;
+    return green - (averageDistance * (1 - greenColor / 50));
 }
 
-function applyBlueChanges(blue) {
+function applyBlueChanges(blue, iteration) {
     const blueColor = blueValue.innerText;
     if(blueColor == 50) { return blue; }
     if(blueColor > 50) {
         const distance = 255 - blue;
         return blue + (distance * (blueColor - 50) / 50);
     }
-    return blue * (blueColor) / 50
+    const average = (iteration[0] + iteration[1] + iteration[2]) / 3;
+    const averageDistance = blue - average;
+    return blue - (averageDistance * (1 - blueColor / 50));
 }
 
 function applySliderChanges(event) {
@@ -106,15 +112,12 @@ function applySliderChanges(event) {
 
     let array = imageData.data;
     for(let i = 0; i < array.length; i = i+4) {
-
-        //Aplicar vermelho
-        modifiedImageData.data[i] = applyRedChanges(array[i]);
-
-        //Aplicar verde
-        modifiedImageData.data[i + 1] = applyGreenChanges(array[i + 1]);
-
-        //Aplicar azul
-        modifiedImageData.data[i + 2] = applyBlueChanges(array[i + 2]);
+        const iteration = [
+            array[i], array[i + 1], array[i + 2]
+        ]
+        modifiedImageData.data[i]       = applyRedChanges(array[i],         iteration);
+        modifiedImageData.data[i + 1]   = applyGreenChanges(array[i + 1],   iteration);
+        modifiedImageData.data[i + 2]   = applyBlueChanges(array[i + 2],    iteration);
         
     }
     context.clearRect(0, 0, canvas.width, canvas.height);
