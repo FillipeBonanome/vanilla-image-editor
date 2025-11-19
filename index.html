@@ -13,29 +13,34 @@
         <div class="left">    
             <canvas id="canva" width="1080" height="720"></canvas>
             <label id="inputlabel" for="inputfile">Selecione uma imagem</label>
-            <input id="inputfile" type="file">
+            <input id="inputfile" accept="image/*" type="file">
         </div>
         <div class="right">
             <div class="sliders">
                 <div class="slider">
                     <p>Brilho</p>
                     <input id="brightness-slider" type="range" min="0" max="100" value="50">
-                    <p id="brightness-value">100</p>
+                    <p id="brightness-value">50</p>
+                </div>
+                <div class="slider">
+                    <p>Contraste</p>
+                    <input id="contrast-slider" type="range" min="0" max="100" value="50">
+                    <p id="contrast-value">50</p>
                 </div>
                 <div class="slider">
                     <p>Vermelho</p>
                     <input id="red-slider" type="range" min="0" max="100" value="50">
-                    <p id="red-value">100</p>
+                    <p id="red-value">50</p>
                 </div>
                 <div class="slider">
                     <p>Verde</p>
                     <input id="green-slider" type="range" min="0" max="100" value="50">
-                    <p id="green-value">100</p>
+                    <p id="green-value">50</p>
                 </div>
                 <div class="slider">
                     <p>Azul</p>
                     <input id="blue-slider" type="range" min="0" max="100" value="50">
-                    <p id="blue-value">100</p>
+                    <p id="blue-value">50</p>
                 </div>
             </div>
         </div>
